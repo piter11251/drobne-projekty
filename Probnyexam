@@ -1,0 +1,73 @@
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import matplotlib.pyplot as plt
+import numpy as np
+
+# #Zad_1
+plt.plot((np.arange(0.5,10,0.1)),(np.log(2*np.arange(0.5,10,0.1))),color='blue',linestyle='--')
+plt.plot((np.arange(0.5,10,0.1)),(4*np.arange(0.5,10,0.1)+2),color='red',linestyle=':')
+plt.plot((np.arange(0.5,10,0.1)),(4*(np.cos(np.arange(0.5,10,0.1)))),color='red',linestyle=':')
+plt.grid()
+plt.xticks()
+plt.xlabel('os X')
+plt.ylabel('os y')
+plt.legend(labels=['log(2x)', '2cos(x)','-4x+2'],loc="best")
+plt.title("XD")
+plt.savefig('obrazek.png')
+plt.show()
+
+
+
+# #Zad_2
+xlsx = pd.read_excel('ceny41.xlsx')
+df = pd.DataFrame(xlsx)
+print(df)
+#
+m = df.loc[df["Rodzaje towarÃ³w i usÅ‚ug"]== "marchew - za 1 kg"]
+c = df.loc[df["Rodzaje towarÃ³w i usÅ‚ug"]== "cebula - za 1 kg"]
+z = df.loc[df["Rodzaje towarÃ³w i usÅ‚ug"]== "ziemniaki - za 1 kg"]
+cenam  = m["Wartosc"]
+miesiacm = m["MiesiÄ…ce"]
+cenac  = c["Wartosc"]
+miesiacc = c["MiesiÄ…ce"]
+cenaz  = z["Wartosc"]
+miesiacz = z["MiesiÄ…ce"]
+print("marchew - za 1 kg : ", m["Wartosc"].mean())
+print("cebula - za 1 kg : ", c["Wartosc"].mean())
+plt.plot(miesiacm, cenam, ls='--' ,label='jabÅ‚ka', color = "red")
+plt.plot(miesiacc, cenac, ls='-.' ,label='pomaraÅ„cze', color = "orange")
+plt.plot(miesiacz, cenaz, ls='-.' ,label='cytryny', color = "yellow")
+plt.xlabel("MiesiÄ…ce")
+plt.xticks(rotation=30)
+plt.ylabel("Ceny w zÅ‚")
+plt.figtext(0.02, 0.95, '166324', size=12, color='k')
+plt.grid()
+plt.legend()
+plt.title("Cena towaru za 1 kg rok 2017")
+plt.savefig("excel.jpg")
+plt.show()
+# #Zad_3
+#
+#
+csv = pd.read_csv('cechy41.csv',sep=';',decimal=',')
+df = pd.DataFrame(csv)
+kroki = [0,50,100,150,200]
+
+
+a= df['XD'] = pd.cut(df['Cecha1'],bins=kroki)
+b= df['XD2'] = pd.cut(df['Cecha2'],bins=kroki)
+df.XD = df.XD.astype('string')
+df.XD2 = df.XD2.astype('string')
+fig, axes = plt.subplots(1,2)
+fig.set_figwidth(12)
+fig.set_figheight(6)
+#https://stackoverflow.com/questions/22483588/how-can-i-plot-separate-pandas-dataframes-as-subplots
+df.XD.value_counts().plot(kind='bar',ax=axes[1],rot=0,title="XD")
+df.XD2.value_counts().plot(kind='bar',ax=axes[0],rot=0,title="XD")
+df.dtypes
+df.head()
+plt.show()
+print(a)
