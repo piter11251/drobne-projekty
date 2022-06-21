@@ -79,3 +79,15 @@ int main()
      lista->next=wsk4;  // ustawiamy następnik głowy jako wskaźnik na nowy element
      return 0;
 }
+
+
+tablica tablic
+int **rezerwacja(int n, int m)
+{
+    int **tab = (int**)malloc(sizeof(int*)*n);
+    for(int i=0;i<n;i++)
+    {
+        *(tab+i)=(int*)malloc(sizeof(int)*m);
+    }
+    return tab;
+}
