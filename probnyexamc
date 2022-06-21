@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct element
+{
+    float x;
+    struct element * next;
+};
+
+double srednia(struct element *Lista)
+{
+    struct element *temp = Lista;
+    double suma = 0;
+    int i=0;
+    if(temp == NULL)
+    {
+        return 0;
+    }
+    while(temp!=NULL)
+    {
+        i++;
+        suma = suma + temp->x;
+        temp=temp->next;
+    }
+    return suma/i;
+}
+
+int main()
+{
+    struct element * lista1 = malloc(sizeof(struct element));
+    lista1 -> x = 3.5;
+    lista1 -> next = malloc(sizeof(struct element));
+    lista1 -> next -> x = 5.5;
+    lista1 -> next -> next = malloc(sizeof(struct element));
+    lista1 -> next -> next -> x = 9;
+    lista1 -> next -> next -> next = NULL;
+    printf("%f", srednia(lista1));
+    return 0;
+}
